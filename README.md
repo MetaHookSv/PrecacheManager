@@ -1,5 +1,7 @@
 # PrecacheManager
 
+[中文文档](README.zh-CN.md)
+
 ## Dump the GoldSrc / SvEngine precached resource list
 
 The engine tracks every resource the current map has precached in the `cl_resourcesonhand` list. PrecacheManager resolves that global through the MetaHook gamedata symbol catalog and adds the `fs_dump_precaches` console command, which writes every precached sound, model and generic file into `<mapname>.dump.res` next to the map.
