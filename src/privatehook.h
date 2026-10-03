@@ -35,4 +35,10 @@ typedef struct resource_s
 
 extern resource_t *cl_resourcesonhand;
 
+//Resolve a gamedata symbol for a module. A miss is fatal: it reports the symbol,
+//its owning module, the engine buildnum, the module CRC64 and the host's reason.
+//moduleName only labels the diagnostic; the lookup itself uses moduleBase.
+PVOID GamedataResolvePtr(PVOID moduleBase, const char* moduleName, const char* symbolName, mh_gamesymbol_kind_t kind);
+
+void Engine_FillAddress_CL_ResourceOnHand(void);
 void Engine_FillAddress(void);
