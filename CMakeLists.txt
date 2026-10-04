@@ -65,13 +65,13 @@ install(FILES "$<TARGET_PDB_FILE:PrecacheManager>" DESTINATION svencoop/metahook
 # synchronizer downloads the upstream catalog into a persistent cache, prunes
 # it, and publishes the result.
 option(PRECACHEMANAGER_SYNC_GAMEDATA "Download and prune PrecacheManager's gamedata catalog before building" ON)
-set(PRECACHEMANAGER_GAMEDATA_DIR "${CMAKE_BINARY_DIR}/assets/svencoop/metahook/gamedata/precachemanager" CACHE PATH "PrecacheManager gamedata catalog directory")
+set(PRECACHEMANAGER_GAMEDATA_DIR "${PROJECT_BINARY_DIR}/assets/svencoop/metahook/gamedata/precachemanager" CACHE PATH "PrecacheManager gamedata catalog directory")
 if(PRECACHEMANAGER_SYNC_GAMEDATA)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
     add_custom_target(PrecacheManagerGameData
         COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/scripts/sync-gamedata.py"
             --manifest "${CMAKE_CURRENT_SOURCE_DIR}/scripts/manifests/precachemanager.json"
-            --target-dir "${PRECACHEMANAGER_GAMEDATA_DIR}" --temp-root "${CMAKE_BINARY_DIR}/gamedata-sync"
+            --target-dir "${PRECACHEMANAGER_GAMEDATA_DIR}" --temp-root "${PROJECT_BINARY_DIR}/gamedata-sync"
         COMMENT "Synchronizing and validating PrecacheManager gamedata"
         VERBATIM
     )
