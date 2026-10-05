@@ -51,7 +51,7 @@ cmake -S . -B build/launch -G "Visual Studio 17 2022" -A Win32 -DMETAHOOKSV_ENAB
 
 3. 按「安装」一节所述，把 `PrecacheManager.dll` 和 `gamedata\precachemanager` 复制到 `svencoop/metahook`。
 
-MetaHook SDK 会以固定 commit 自动获取。若要改为基于本地 MetaHook 源码树构建，
+MetaHook SDK 会自动获取最新的 `main` 分支。若要改为基于本地 MetaHook 源码树构建，
 可在命令行传入，或在 configure 前导出同名环境变量：
 
 ```

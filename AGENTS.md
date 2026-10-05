@@ -136,7 +136,7 @@ The scripts configure, build and install. Debug compiles at `/W0`; Release compi
 
 ### Dependencies
 
-- **MetaHook SDK**: fetched automatically at a pinned commit; pass `-DMETAHOOK_SOURCE_PATH=D:\MetaHook` or export the same environment variable to build against a local tree. The path is the repository root providing `include/metahook.h`, `include/HLSDK` and `include/Interface`; `cmake/Dependencies.cmake` validates that `include/metahook.h`, `include/HLSDK/common/interface.cpp`, `include/HLSDK/common/cvardef.h` and `include/Interface/IPlugins.h` exist before anything is downloaded
+- **MetaHook SDK**: fetched automatically from the latest `main`; pass `-DMETAHOOK_SOURCE_PATH=D:\MetaHook` or export the same environment variable to build against a local tree. The path is the repository root providing `include/metahook.h`, `include/HLSDK` and `include/Interface`; `cmake/Dependencies.cmake` validates that `include/metahook.h`, `include/HLSDK/common/interface.cpp`, `include/HLSDK/common/cvardef.h` and `include/Interface/IPlugins.h` exist before anything is downloaded
 - **VC-LTL 5.3.1**: downloaded once into `thirdparty/cache`
 - **No third-party library is linked.** MetaHook is a read-only build input
 
