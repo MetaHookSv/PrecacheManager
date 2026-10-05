@@ -197,20 +197,6 @@ Runtime configuration: `PrecacheManager.dll` must be listed in the host's `metah
 2. **Breakpoint locations**: `Engine_FillAddress_CL_ResourceOnHand()` (resolution), `HUD_Init()` (command registration), `FS_Dump_Precaches()` (the walk)
 3. **Output location**: `<mapname>.dump.res` is written next to the map, i.e. under `maps/` with the working directory of the game
 
-## FAQ
-
-### Q: Why does a missing gamedata record abort instead of doing nothing?
-A: `cl_resourcesonhand` comes from gamedata only. A miss would leave the pointer null and the command useless, so `Failed to resolve "cl_resourcesonhand"` (with module, buildnum, CRC64 and status) is raised at load time instead.
-
-### Q: Why is the output named `<mapname>.dump.res`?
-A: The code strips the last four characters of the level name and appends `.dump.res`, implicitly assuming the engine returns a name ending in `.bsp`.
-
-### Q: Are all precached sounds listed?
-A: Not necessarily. Sven Co-op sounds also go through the `soundcache.txt` mechanism, so the export covers the `cl_resourcesonhand` list only, not every sound asset the map can play.
-
-### Q: Does a successful build prove the dump works?
-A: No. There is no test suite here, so a green configure/build says nothing about whether the global resolves or the file is written at runtime. Claims about in-game behavior require evidence from a real game run. Documentation changes need content, path and format checks, not a plugin rebuild.
-
 ## Repository Rules
 
 - Preserve the MetaHook API, plugin exports and calling conventions. Match the naming, indentation and comment style of the files you touch
