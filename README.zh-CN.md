@@ -10,7 +10,7 @@
 
 ## 安装
 
-1. 下载并安装 [MetaHookSv](https://github.com/hzqst/MetaHookSv)。
+1. 下载并安装 [MetaHookSv](https://github.com/MetaHookSv/MetaHookSv)。
 
 2. 构建或下载 .dll，放到 `/SteamLibrary/steamapps/common/Sven Co-op/svencoop/metahook/plugins` 目录。
 
