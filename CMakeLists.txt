@@ -52,7 +52,9 @@ target_compile_options(precachemanager_settings INTERFACE /permissive
     $<$<CONFIG:Release>:/wd4996>)
 
 include(cmake/Sources.cmake)
+include(cmake/SourceGroups.cmake)
 add_library(PrecacheManager SHARED ${PRECACHEMANAGER_SOURCES})
+precachemanager_assign_source_groups(PrecacheManager)
 target_link_libraries(PrecacheManager PRIVATE precachemanager_settings)
 target_compile_options(PrecacheManager PRIVATE /MP /Zi)
 target_link_options(PrecacheManager PRIVATE /DEBUG
