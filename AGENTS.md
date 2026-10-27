@@ -26,14 +26,12 @@ PrecacheManager/
 ├── cmake/
 │   ├── Sources.cmake          # Explicit compile list
 │   ├── Dependencies.cmake     # Source-path resolution and FetchContent fallback
-│   ├── LaunchGame.cmake       # Optional F5 deploy support
-│   └── VCLTL.cmake            # VC-LTL 5.3.1
+│   └── LaunchGame.cmake       # Optional F5 deploy support
 ├── scripts/
 │   ├── build-PrecacheManager-x86-{Debug,Release}.bat
 │   ├── manifests/precachemanager.json  # Gamedata manifest (one `global` symbol)
 │   ├── sync-gamedata.py                # Prunes the upstream catalog into the build tree
 │   └── validate-gamedata.py            # Validates it before the plugin target builds
-├── thirdparty/cache/          # Ignored VC-LTL binary cache
 ├── build/x86/<configuration>/    # Ignored build output
 ├── install/x86/<configuration>/  # Ignored install output
 ├── README.md, README.zh-CN.md # Bilingual install / command / build documentation
@@ -125,7 +123,7 @@ Write "maps/<map>.dump.res" and close the handle
 
 ## Build Instructions
 
-Requirements: Windows, Visual Studio 2022, CMake 3.21 or newer, Python 3.8 or newer, MSVC x86 (`-A Win32`), static CRT (`MultiThreaded`), `_MBCS` and VC-LTL 5.3.1. No `CMAKE_CXX_STANDARD` is set, so the MSVC default language level applies.
+Requirements: Windows, Visual Studio 2022, CMake 3.21 or newer, Python 3.8 or newer, MSVC x86 (`-A Win32`), static CRT (`MultiThreaded`) and `_MBCS`. No `CMAKE_CXX_STANDARD` is set, so the MSVC default language level applies.
 
 ```bat
 scripts\build-PrecacheManager-x86-Release.bat
@@ -137,7 +135,6 @@ The scripts configure, build and install. Debug compiles at `/W0`; Release compi
 ### Dependencies
 
 - **MetaHook SDK**: fetched automatically from the latest `main`; pass `-DMETAHOOK_SOURCE_PATH=D:\MetaHook` or export the same environment variable to build against a local tree. The path is the repository root providing `include/metahook.h`, `include/HLSDK` and `include/Interface`; `cmake/Dependencies.cmake` validates that `include/metahook.h`, `include/HLSDK/common/interface.cpp`, `include/HLSDK/common/cvardef.h` and `include/Interface/IPlugins.h` exist before anything is downloaded
-- **VC-LTL 5.3.1**: downloaded once into `thirdparty/cache`
 - **No third-party library is linked.** MetaHook is a read-only build input
 
 Keep `cmake/Sources.cmake` as the explicit compile list; `include/HLSDK/common/interface.cpp` is compiled in because `EXPOSE_SINGLE_INTERFACE` (which exports `CreateInterface`) lives there.
@@ -202,7 +199,7 @@ Runtime configuration: `PrecacheManager.dll` must be listed in the host's `metah
 - The engine global comes only from gamedata and the host gamedata contract. **Do not** reintroduce signature search, hard-coded offsets or RVA/VA conversion for it; the search and hook macros left in `src/plugins.h` are unused legacy helpers, not a supported path. When the gamedata lookup fails, report it loudly (as `Sys_Error` does today) instead of adding a fallback
 - Keep the `static_assert(METAHOOK_API_VERSION >= 109)` guard in sync with the APIs actually used
 - Do not modify external or third-party sources; MetaHook is a read-only build input
-- MSVC x86 only. Keep the static CRT / VC-LTL and warning-level settings in `CMakeLists.txt` in sync with the other standalone plugin repositories
+- MSVC x86 only. Keep the static CRT and warning-level settings in `CMakeLists.txt` in sync with the other standalone plugin repositories
 - `README.md` and `README.zh-CN.md` are a pair: keep the command name, install steps and build options consistent in both
 
 ## C/C++ formatting

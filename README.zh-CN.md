@@ -43,7 +43,7 @@ cmake -S . -B build/launch -G "Visual Studio 17 2022" -A Win32 -DMETAHOOKSV_ENAB
 ## 构建
 
 要求：Windows、Visual Studio 2022、CMake 3.21 或更新版本、Python 3.8 或更新版本。
-首次 configure 会把 VC-LTL 5.3.1 下载到 `thirdparty/cache`，并同步 gamedata catalog。
+首次 configure 会同步 gamedata catalog。
 
 1. 运行 `scripts\build-PrecacheManager-x86-Release.bat`（或 `scripts\build-PrecacheManager-x86-Debug.bat`）。
 
